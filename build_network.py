@@ -26,7 +26,7 @@ def load_model():
     base_model = DenseNet121(include_top=False, input_tensor=img_input, input_shape=input_shape, pooling='avg')
     prediction_layer = Dense(len(CLASS_NAMES), activation='sigmoid', name='predictions')(base_model.output)
     model = Model(inputs=img_input, outputs=prediction_layer)
-    model.load_weights('brucechou1983_CheXNet_Keras_0.3.0_weights.h5')
+    model.load_weights('praeder_weights.h5')
 
 
 @app.route("/predict_chest", methods=["POST"])
