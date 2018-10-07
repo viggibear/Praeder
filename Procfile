@@ -1,1 +1,1 @@
-gunicorn build_network
+web: gunicorn build_network
