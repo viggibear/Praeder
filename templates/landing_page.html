@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% extends 'base_template.html' %}
+{% block jumbotron %}
+<section class="jumbotron jumbotron-fluid text-center" style="background-image:url({{ url_for('static', filename='assets/img/background.png') }}); opacity: 0.6 ">
+<!--<section class="jumbotron jumbotron-fluid text-center"-->
+         <!--style="background-image:url(../static/assets/img/background.png); opacity: 0.6 ">-->
+    <div class="container">
+        <h1 class="display-1"><strong>Praeder</strong></h1>
+        <p class="display-4">Computer Vision and Medical Imaging</p>
+    </div>
+</section>
+{% endblock %}
+
+{% block chexnet %}
+<form method="post" enctype="multipart/form-data" action="/predict_chest" class="container" name="chexnet">
+    <p>
+    <h1 class="h1">CheXNet</h1>
+    </p>
+    <p>
+        <input type="file" name="image" class="btn btn-primary btn-round">
+    </p>
+    <p>
+        <button type="submit" class="btn btn-rose">Process XRay</button>
+    </p>
+    <p>
+        <h6 class="h6">Developed using @brucechou1983's implementation of CheXNet in Keras</h6>
+    </p>
+</form>
+{% endblock %}
+
+

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% extends 'base_template.html' %}
+
+{% block results %}
+<div class="container marketing">
+    <h1 class="display-3">CheXNet Results</h1>
+    {% if data.error %}
+    <h1 class="text-error">{{ data.error }}</h1>
+    {% elif data.success %}
+    <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Diagnosis</th>
+                    <th scope="col">Probability</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in range(3) %}
+                <tr>
+                    <th scope="row">{{ i+1 }}</th>
+                    <td>{{ data.predictions[i].get('label') }}</td>
+                    <td>{{ data.predictions[i].get('probability') * 100|round(2, 'common') }}%</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-5 order-md-1">
+            <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500"
+                 src="../static/predictions/{{ data.image_dir }}"
+                 data-holder-rendered="true" style="width: 500px; height: 500px;">
+        </div>
+    </div>
+    {% endif %}
+</div>
+<hr class="featurette-divider" style="color:transparent">
+{% if data.predictions[0].get('probability')<0.3 %}
+    {{ self.disclaimer() }}
+{% endif %}
+{% endblock %}
+
+{% block disclaimer %}
+<div class="card container text-white bg-warning mb-5 mt-10" style="max-width: 60rem;">
+    <div class="card-header">Ambiguous Result</div>
+    <div class="card-body">
+        <h5 class="card-title">Possible "No Finding"</h5>
+        <p class="card-text">It is likely that there is nothing wrong with the X-Ray presented. Please ensure that image
+            presented is indeed a Frontal Chest X-Ray</p>
+    </div>
+</div>
+{% endblock %}
