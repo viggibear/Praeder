@@ -2,7 +2,7 @@ numpy==1.15.2
 opencv_python==3.4.3.18
 scikit_image==0.14.1
 Keras==2.2.4
-tensorflow==1.11.0
+tensorflow==2.5.1
 gunicorn==19.9.0
 Flask==1.0.2
 Pillow==5.3.0
